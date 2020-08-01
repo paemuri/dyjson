@@ -8,12 +8,13 @@ import (
 type jsonDataType uint8
 
 const (
-	objectDataType jsonDataType = 1 + iota
+	errorDataType jsonDataType = iota
+	nullDataType
+	objectDataType
 	arrayDataType
 	stringDataType
 	numberDataType
 	booleanDataType
-	nullDataType
 )
 
 // JSONValue represents a JSON value, independently of its data type.
@@ -39,6 +40,12 @@ func Parse(value []byte) *JSONValue {
 // ParseString parses the value (as a string) into a new JSONValue.
 func ParseString(value string) *JSONValue {
 	return Parse([]byte(value))
+}
+
+// IsNull checks if the value is null.
+func (v *JSONValue) IsNull() bool {
+	v.parseNull()
+	return v.dataType == nullDataType
 }
 
 // IsObject checks if the value is a JSON object.
@@ -69,12 +76,6 @@ func (v *JSONValue) IsNumber() bool {
 func (v *JSONValue) IsBoolean() bool {
 	v.parseBoolean()
 	return v.dataType == booleanDataType
-}
-
-// IsNull checks if the value is null.
-func (v *JSONValue) IsNull() bool {
-	v.parseNull()
-	return v.dataType == nullDataType
 }
 
 // Object returns the value parsed as a JSON object (JSONValue).
@@ -111,19 +112,25 @@ func (v *JSONValue) Boolean() bool {
 // Useful to update itself when any child's value changes.
 func (v *JSONValue) Set() {
 	switch {
-	case v.IsObject():
-		v.SetObject(v.Object())
-	case v.IsArray():
-		v.SetArray(v.Array())
-	case v.IsString():
-		v.SetString(v.String())
-	case v.IsNumber():
-		v.SetNumber(v.Number())
-	case v.IsBoolean():
-		v.SetBoolean(v.Boolean())
 	case v.IsNull():
 		v.SetNull()
+	case v.IsObject():
+		v.SetObject(v.valObject)
+	case v.IsArray():
+		v.SetArray(v.valArray)
+	case v.IsString():
+		v.SetString(v.valString)
+	case v.IsNumber():
+		v.SetNumber(v.valNumber)
+	case v.IsBoolean():
+		v.SetBoolean(v.valBoolean)
 	}
+}
+
+// SetNull sets the value as a JSON null.
+func (v *JSONValue) SetNull() {
+	v.RawMessage = []byte("null")
+	v.dataType = nullDataType
 }
 
 // SetObject sets the value as a JSON object.
@@ -194,10 +201,15 @@ func (v *JSONValue) SetBoolean(val bool) {
 	v.dataType = booleanDataType
 }
 
-// SetNull sets the value as a JSON null.
-func (v *JSONValue) SetNull() {
-	v.RawMessage = []byte("null")
-	v.dataType = nullDataType
+func (v *JSONValue) parseNull() {
+	if v.dataType != 0 {
+		return
+	}
+
+	var val interface{}
+	if json.Unmarshal(v.RawMessage, &val) == nil && val == nil {
+		v.dataType = nullDataType
+	}
 }
 
 func (v *JSONValue) parseObject() {
@@ -247,17 +259,5 @@ func (v *JSONValue) parseBoolean() {
 
 	if json.Unmarshal(v.RawMessage, &v.valBoolean) == nil {
 		v.dataType = booleanDataType
-	}
-}
-
-func (v *JSONValue) parseNull() {
-	if v.dataType != 0 {
-		return
-	}
-
-	var val interface{}
-	json.Unmarshal(v.RawMessage, &val)
-	if val == nil {
-		v.dataType = nullDataType
 	}
 }
