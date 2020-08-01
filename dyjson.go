@@ -1,7 +1,6 @@
 package dyjson
 
 import (
-	"bytes"
 	"encoding/json"
 	"strconv"
 )
@@ -32,7 +31,9 @@ type JSONValue struct {
 
 // Parse parses the value into a new JSONValue.
 func Parse(value []byte) *JSONValue {
-	return &JSONValue{RawMessage: value}
+	return &JSONValue{
+		RawMessage: value,
+	}
 }
 
 // ParseString parses the value (as a string) into a new JSONValue.
@@ -127,58 +128,50 @@ func (v *JSONValue) Set() {
 
 // SetObject sets the value as a JSON object.
 func (v *JSONValue) SetObject(val map[string]*JSONValue) {
-	var buf bytes.Buffer
-	var i int
 
-	buf.WriteByte('{')
+	var i int
+	v.RawMessage = []byte{'{'}
 	for key, value := range val {
 
 		if i != 0 {
-			buf.WriteByte(',')
+			v.RawMessage = append(v.RawMessage, ',')
 		}
 		i++
 
-		buf.WriteByte('"')
-		buf.WriteString(key)
-		buf.WriteByte('"')
-		buf.WriteByte(':')
-		buf.Write(value.RawMessage)
-
+		v.RawMessage = append(v.RawMessage, '"')
+		v.RawMessage = append(v.RawMessage, key...)
+		v.RawMessage = append(v.RawMessage, '"', ':')
+		v.RawMessage = append(v.RawMessage, value.RawMessage...)
 	}
-	buf.WriteByte('}')
+	v.RawMessage = append(v.RawMessage, '}')
 
-	v.RawMessage = buf.Bytes()
 	v.valObject = val
 	v.dataType = objectDataType
 }
 
 // SetArray sets the value as a JSON array.
 func (v *JSONValue) SetArray(val []*JSONValue) {
-	var buf bytes.Buffer
 
-	buf.WriteByte('[')
+	v.RawMessage = []byte{'['}
 	for i, value := range val {
 		if i != 0 {
-			buf.WriteByte(',')
+			v.RawMessage = append(v.RawMessage, ',')
 		}
-		buf.Write(value.RawMessage)
+		v.RawMessage = append(v.RawMessage, value.RawMessage...)
 	}
-	buf.WriteByte(']')
+	v.RawMessage = append(v.RawMessage, ']')
 
-	v.RawMessage = buf.Bytes()
 	v.valArray = val
 	v.dataType = arrayDataType
 }
 
 // SetString sets the value as a JSON string.
 func (v *JSONValue) SetString(val string) {
-	var buf bytes.Buffer
 
-	buf.WriteByte('"')
-	buf.WriteString(val)
-	buf.WriteByte('"')
+	v.RawMessage = []byte{'"'}
+	v.RawMessage = append(v.RawMessage, val...)
+	v.RawMessage = append(v.RawMessage, '"')
 
-	v.RawMessage = buf.Bytes()
 	v.valString = val
 	v.dataType = stringDataType
 }
