@@ -6,13 +6,65 @@
 [![Codecov.io][badge-4-img]][badge-4-link]
 [![Go Report Card][badge-5-img]][badge-5-link]
 
-Manipulating dynamic and unknown JSON with ease!
+A small and simple package to help you handle dynamic and unknown JSON
+elegantly.
+
+## Why
+
+DyJSON lets you handle dynamic JSON in a different way. It is perfect for cases
+where you have to deal differently based on a field type or structure, e.g. call
+a function recursivelly if it's an object or array until you find a string or
+number value (something similar to what I needed).
+
+If, while dealing with your JSON, you know the specific value path, or just want
+to validate it, I suggest you to use [Gabs][1].
+
+## Example
+
+```go
+func main() {
+
+    const json = `
+        {
+            "key": {
+                "key": [
+                    "test",
+                    1,
+                    true
+                ]
+            }
+        }
+    `
+
+    handle(dyjson.ParseString(json))
+
+    // The output is:
+    //   found string: test
+    //   found number: 1.00
+}
+
+func handle(v *dyjson.JSONValue) {
+    switch {
+    case v.IsArray():
+        for _, av := range v.Array() {
+            handle(av)
+        }
+    case v.IsObject():
+        handle(v.Object()["key"])
+    case v.IsString():
+        fmt.Printf("found string: %s\n", v.String())
+    case v.IsNumber():
+        fmt.Printf("found number: %.2f\n", v.Number())
+    }
+}
+```
 
 ## License
 
-This project code is in the public domain. See the [LICENSE file][1].
+This project code is in the public domain. See the [LICENSE file][2].
 
-[1]: ./LICENSE
+[1]: https://github.com/Jeffail/gabs
+[2]: ./LICENSE
 
 [badge-1-img]: https://img.shields.io/github/license/Nhanderu/dyjson?style=flat-square
 [badge-1-link]: https://github.com/Nhanderu/dyjson/blob/master/LICENSE
