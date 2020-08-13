@@ -11,13 +11,14 @@ elegantly.
 
 ## Why
 
-DyJSON lets you handle dynamic JSON in a different way. It is perfect for cases
-where you have to deal differently based on a field type or structure, e.g. call
-a function recursivelly if it's an object or array until you find a string or
-number value (something similar to what I needed).
+DyJSON lets you handle dynamic JSON in a different way. It is perfect
+for cases where you have to deal differently based on a field type or
+structure, e.g. call a function recursivelly if it's an object or array
+until you find a string or number value (something similar to what I
+needed).
 
-If, while dealing with your JSON, you know the specific value path, or just want
-to validate it, I suggest you to use [Gabs][1].
+If, while dealing with your JSON, you know the specific value path, or
+just want to validate it, I suggest you to use [Gabs][1].
 
 ## Example
 
@@ -65,9 +66,9 @@ This project code is in the public domain. See the [LICENSE file][2].
 
 ### Contribution
 
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you shall be in the public domain, without any
-additional terms or conditions.
+Unless you explicitly state otherwise, any contribution intentionally
+submitted for inclusion in the work by you shall be in the public
+domain, without any additional terms or conditions.
 
 [1]: https://github.com/Jeffail/gabs
 [2]: ./LICENSE
