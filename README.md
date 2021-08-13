@@ -73,13 +73,13 @@ domain, without any additional terms or conditions.
 [1]: https://github.com/Jeffail/gabs
 [2]: ./LICENSE
 
-[badge-1-img]: https://img.shields.io/github/license/Nhanderu/dyjson?style=flat-square
-[badge-1-link]: https://github.com/Nhanderu/dyjson/blob/master/LICENSE
+[badge-1-img]: https://img.shields.io/github/license/paemuri/dyjson?style=flat-square
+[badge-1-link]: https://github.com/paemuri/dyjson/blob/master/LICENSE
 [badge-2-img]: https://img.shields.io/badge/go.dev-reference-007d9c?style=flat-square&logo=go&logoColor=white
-[badge-2-link]: https://pkg.go.dev/github.com/Nhanderu/dyjson
-[badge-3-img]: https://img.shields.io/travis/Nhanderu/dyjson?style=flat-square
-[badge-3-link]: https://travis-ci.org/Nhanderu/dyjson
-[badge-4-img]: https://img.shields.io/codecov/c/gh/Nhanderu/dyjson?style=flat-square
-[badge-4-link]: https://codecov.io/gh/Nhanderu/dyjson
-[badge-5-img]: https://goreportcard.com/badge/github.com/Nhanderu/dyjson?style=flat-square
-[badge-5-link]: https://goreportcard.com/report/github.com/Nhanderu/dyjson
+[badge-2-link]: https://pkg.go.dev/github.com/paemuri/dyjson
+[badge-3-img]: https://img.shields.io/travis/paemuri/dyjson?style=flat-square
+[badge-3-link]: https://travis-ci.org/paemuri/dyjson
+[badge-4-img]: https://img.shields.io/codecov/c/gh/paemuri/dyjson?style=flat-square
+[badge-4-link]: https://codecov.io/gh/paemuri/dyjson
+[badge-5-img]: https://goreportcard.com/badge/github.com/paemuri/dyjson?style=flat-square
+[badge-5-link]: https://goreportcard.com/report/github.com/paemuri/dyjson
