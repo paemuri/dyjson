@@ -76,7 +76,7 @@ conditions.
 
 ### License history
 
-Starting with v2.0.0, this project is licensed under MPL-2.0
+Starting with v2.0.0, this project is licensed under MPL-2.0.
 
 [1]: https://github.com/Jeffail/gabs
 
