@@ -1,4 +1,4 @@
-module github.com/paemuri/dyjson
+module github.com/paemuri/dyjson/v2
 
 go 1.15
 
