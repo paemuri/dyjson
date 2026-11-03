@@ -2,6 +2,7 @@
 
 [![License][badge-1-img]][badge-1-link]
 [![go.dev][badge-2-img]][badge-2-link]
+[![CI][badge-3-img]][badge-3-link]
 
 A small and simple package to help you handle dynamic and unknown JSON
 elegantly.
@@ -83,6 +84,8 @@ Starting with v2.0.0, this project is licensed under MPL-2.0.
 [badge-1-link]: ./LICENSE
 [badge-2-img]: https://img.shields.io/badge/go.dev-reference-007d9c?style=flat-square&logo=go&logoColor=white
 [badge-2-link]: https://pkg.go.dev/git.sr.ht/~paemuri/dyjson/v2
+[badge-3-img]: https://img.shields.io/github/actions/workflow/status/paemuri/dyjson/ci.yaml?branch=main&style=flat-square
+[badge-3-link]: https://github.com/paemuri/dyjson/actions/workflows/ci.yaml
 
 [source-srht]: https://git.sr.ht/~paemuri/dyjson
 [source-codeberg]: https://codeberg.org/paemuri/dyjson
