@@ -2,4 +2,4 @@ module git.sr.ht/~paemuri/dyjson/v2
 
 go 1.15
 
-require github.com/stretchr/testify v1.6.1
+require github.com/stretchr/testify v1.12.1
