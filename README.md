@@ -62,7 +62,9 @@ func handle(v *dyjson.JSONValue) {
 
 ## Source code
 
-The main repository is on [GitHub][source-github].
+The main repository is on [SourceHut][source-srht]. Mirrors exist on
+[Codeberg][source-codeberg] and [GitHub][source-github] for convenience, but
+they might occasionally be outdated.
 
 ## License and contribution
 
@@ -91,6 +93,8 @@ Starting with v2.0.0, this project is licensed under MPL-2.0
 [badge-5-img]: https://goreportcard.com/badge/github.com/paemuri/dyjson?style=flat-square
 [badge-5-link]: https://goreportcard.com/report/github.com/paemuri/dyjson
 
+[source-srht]: https://git.sr.ht/~paemuri/dyjson
+[source-codeberg]: https://codeberg.org/paemuri/dyjson
 [source-github]: https://github.com/paemuri/dyjson
 
 [license-code]: ./LICENSES/MPL-2.0.txt
